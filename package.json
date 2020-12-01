@@ -1,0 +1,16 @@
+{
+  "name": "figma-dash-core",
+  "version": "1.0.0",
+  "files": [
+    "config-handler.js",
+    "exception-handler.js",
+    "functions.js",
+    "validations.js"
+  ],
+  "author": "Levi Pires",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "lodash": "^4.17.20"
+  }
+}
