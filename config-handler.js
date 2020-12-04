@@ -1,7 +1,15 @@
 const exceptionHandler = require("./exception-handler");
 const path = require("path");
+const packageJson = require("./package.json");
 
-exports.path = path.resolve(process.cwd(), "./figma-dash.config.js");
+const parsedName = packageJson.name.split(/-|[A-Z]/);
+
+parsedName.pop();
+
+exports.path = path.resolve(
+  process.cwd(),
+  `./${parsedName.join("-")}.config.js`
+);
 
 exports.handle = () => {
   try {
