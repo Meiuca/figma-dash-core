@@ -9,10 +9,10 @@ exports.validateFonts = () => {
   if (typeof config.fonts.output != "string")
     throw new TypeError("outPath must be declared and must be a string");
 
-  if (typeof config.fonts.linkCommand != "string")
-    throw new TypeError("linkCommand must be declared and must be a string");
+  if (config.fonts.linkCommand && typeof config.fonts.linkCommand != "string")
+    throw new TypeError("linkCommand must be a string");
 
-  if (!config.fonts.provider && config.fonts.files)
+  if (config.fonts.files && !config.fonts.provider)
     throw new TypeError("provider must be declared");
 
   if (config.fonts.provider && !config.fonts.provider.includes("http"))
