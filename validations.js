@@ -24,12 +24,8 @@ exports.validateFonts = () => {
   if (config.fonts.provider && !config.fonts.provider.includes("{w}"))
     throw new SyntaxError("provider must include '{w}'");
 
-  if (
-    config.fonts.files &&
-    (!Array.isArray(config.fonts.files) ||
-      config.fonts.files.some((file) => typeof file != "string"))
-  )
-    throw new TypeError("files must be an string array");
+  // if (config.fonts.files && typeof config.fonts.files != "boolean")
+  //   throw new TypeError("files must be a boolean");
 
   if (
     config.fonts.urls &&
