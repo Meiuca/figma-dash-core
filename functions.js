@@ -5,13 +5,12 @@ exports.depth = (array) =>
 
 exports.cleanStr = (str) =>
   (str.length > 75 ? str.slice(0, 75) : str)
-    // Experimental
     .replace(/[^A-Za-z0-9_:\(\)]/g, "-")
     .replace(/^[-]+|[-]+$|[-]{2,}/g, "")
     .toLowerCase();
 
 exports.cleanTokenValue = (str) =>
-  str.replace(/[^A-Za-z0-9.%#\s]/g, "").replace(/^\s+|\s+$/g, "");
+  str.replace(/[^A-Za-z0-9.,'"\(\)%#\s]/g, "").replace(/^\s+|\s+$/g, "");
 
 exports.parseDeepObj = (obj) => {
   let mappedObj = Object.values(obj).map((item) =>
