@@ -53,7 +53,7 @@ exports.tokenValueRegexTest = (key) => {
 exports.parentContainerTokenRegexTest = (key) => {
   let patterns = require("./config-handler").handle().patterns || {};
 
-  return (patterns.parentContainerTokenIdentifier || /:{2}/).test(key);
+  return (patterns.parentContainerTokenIdentifier || /^:{2}/).test(key);
 };
 
 exports.tokenNameRegexTest = (key) => {
@@ -65,5 +65,5 @@ exports.tokenNameRegexTest = (key) => {
 exports.childContainerTokenRegexTest = (key) => {
   let patterns = require("./config-handler").handle().patterns || {};
 
-  return (patterns.childContainerTokenIdentifier || /:{1}/).test(key);
+  return (patterns.childContainerTokenIdentifier || /^:{1}/).test(key);
 };
