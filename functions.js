@@ -5,6 +5,7 @@ exports.depth = (array) =>
 
 exports.cleanStr = (str) =>
   (str.length > 75 ? str.slice(0, 75) : str)
+    // Experimental
     .replace(/[^A-Za-z0-9_:\(\)]/g, "-")
     .replace(/^[-]+|[-]+$|[-]{2,}/g, "")
     .toLowerCase();
