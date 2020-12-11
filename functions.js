@@ -10,7 +10,7 @@ exports.cleanStr = (str) =>
     .toLowerCase();
 
 exports.cleanTokenValue = (str) =>
-  str.replace(/[^A-Za-z0-9.,'"\(\)%#\s]/g, "").replace(/^\s+|\s+$/g, "");
+  str.replace(/[^A-Za-z0-9.,'\(\)%#\s]/g, "").replace(/^\s+|\s+$/g, "");
 
 exports.parseDeepObj = (obj) => {
   let mappedObj = Object.values(obj).map((item) =>
