@@ -1,10 +1,10 @@
-const chalk = require("chalk");
-const { tab } = require("./functions");
+import chalk from "chalk";
+import { tab } from "./functions";
 
-module.exports = (error, help) => {
+export default function (error: Error, help?: string) {
   error.stack =
     (error.stack || "undefined").replace(/\n/g, "\n" + tab(1)) +
     (help ? `${chalk.yellowBright("\n\n help")} ${help}\n` : "");
 
   throw error;
-};
+}
