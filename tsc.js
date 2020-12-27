@@ -1,5 +1,9 @@
 require("child_process")
-  .execFile("../typescript/bin/tsc")
+  .execFile("node", ["../typescript/lib/tsc"], {
+    cwd: process.cwd(),
+    shell: true,
+    windowsHide: true,
+  })
   .addListener("close", () =>
     require("fs").rmSync("./src", { recursive: true })
   );
