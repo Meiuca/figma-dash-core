@@ -1,6 +1,6 @@
 import exceptionHandler from "./exception-handler";
 import { resolve } from "path";
-import packageJson from "./package.json";
+import packageJson from "../package.json";
 
 const parsedName = packageJson.name.split(/-|[A-Z]/);
 
