@@ -2,6 +2,8 @@ import exceptionHandler from "./exception-handler";
 import { resolve } from "path";
 import packageJson from "../package.json";
 
+var config: FigmaDashConfig & FigmaDashModules;
+
 const parsedName = packageJson.name.split(/-|[A-Z]/);
 
 parsedName.pop();
@@ -11,13 +13,16 @@ export const path = resolve(
   `./${parsedName.join("-")}.config.js`
 );
 
-export function handle(): (FigmaDashConfig & FigmaDashModules) | false {
+export function handle() {
   try {
-    return require(path);
+    if (!config) config = require(path);
+
+    return config;
   } catch (err) {
     exceptionHandler(err, "Try using 'init' first");
 
-    return false;
+    // Node will never reach this part, since exceptionHandler() throws an Error
+    return {} as FigmaDashConfig & FigmaDashModules;
   }
 }
 
