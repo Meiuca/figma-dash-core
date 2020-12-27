@@ -56,22 +56,24 @@ export interface FigmaDashConfig {
 }
 
 export interface FigmaDashModules {
-  [module: string]: {
-    filter?: string | object;
+  [module: string]: FigmaDashModule;
+}
 
-    tokens: {
-      output: {
-        dir: string;
-        extension?: string;
-        format?: string;
-      };
+export interface FigmaDashModule {
+  filter?: string | object;
 
-      files?: {
-        destination: string;
-        format: string;
-        include?: string;
-        filter?: string | object;
-      }[];
+  tokens: {
+    output: {
+      dir: string;
+      extension?: string;
+      format?: string;
     };
+
+    files?: {
+      destination: string;
+      format: string;
+      include?: string;
+      filter?: string | object;
+    }[];
   };
 }
