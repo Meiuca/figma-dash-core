@@ -26,6 +26,11 @@ export function handle() {
   }
 }
 
+export interface DirectLink {
+  src: string;
+  local: string;
+}
+
 export interface FigmaDashConfig {
   patterns?: {
     tokenNameIdentifier?: RegExp;
@@ -48,10 +53,7 @@ export interface FigmaDashConfig {
     provider: string;
     files: boolean;
     urls?: string[];
-    directLinks?: {
-      src: string;
-      local: string;
-    }[];
+    directLinks?: DirectLink[];
   };
 }
 

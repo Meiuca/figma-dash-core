@@ -2,10 +2,7 @@
   "name": "figma-dash-core",
   "version": "1.0.0",
   "files": [
-    "dist",
-    "tsconfig.json",
-    "src",
-    "tsc.js"
+    "dist"
   ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,15 +10,16 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "postinstall": "node tsc.js"
+    "prepack": "tsc",
+    "git-publish": "yarn tsc && git add -A && git commit && git push"
   },
   "dependencies": {
     "chalk": "^4.1.0",
-    "lodash": "^4.17.20",
-    "typescript": "^4.1.3"
+    "lodash": "^4.17.20"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.166",
-    "@types/node": "^14.14.16"
+    "@types/node": "^14.14.16",
+    "typescript": "^4.1.3"
   }
 }
