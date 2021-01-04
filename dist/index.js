@@ -22,9 +22,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Validations = exports.Functions = exports.ExceptionHandler = exports.ConfigHandler = void 0;
-exports.ConfigHandler = __importStar(require("./config-handler"));
-var exception_handler_1 = require("./exception-handler");
-Object.defineProperty(exports, "ExceptionHandler", { enumerable: true, get: function () { return __importDefault(exception_handler_1).default; } });
-exports.Functions = __importStar(require("./functions"));
-exports.Validations = __importStar(require("./validations"));
+const config_handler_1 = require("./config-handler");
+const exception_handler_1 = __importStar(require("./exception-handler"));
+const functions_1 = __importDefault(require("./functions"));
+const validations_1 = __importDefault(require("./validations"));
+class FigmaDashCore {
+    constructor(config) {
+        this.FigmaDashError = exception_handler_1.FigmaDashError;
+        let error;
+        try {
+            this.config = config || config_handler_1.handle();
+        }
+        catch (err) {
+            error = err;
+            this.config = {};
+        }
+        this.path = config_handler_1.path;
+        this.exceptionHandler = exception_handler_1.default(this);
+        this.Functions = functions_1.default(this);
+        this.Validations = validations_1.default(this);
+        if (error) {
+            this.exceptionHandler(error, "Try 'init' first");
+        }
+    }
+}
+exports.default = FigmaDashCore;

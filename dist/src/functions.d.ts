@@ -1,9 +1,0 @@
-export declare function tab(count: number): string;
-export declare function depth(array: any[]): number;
-export declare function cleanStr(str: string): string;
-export declare function cleanTokenValue(str: string): string;
-export declare function parseDeepObj(obj: object): any[];
-export declare function tokenValueRegexTest(key: string): boolean;
-export declare function parentContainerTokenRegexTest(key: string): boolean;
-export declare function tokenNameRegexTest(key: string): boolean;
-export declare function childContainerTokenRegexTest(key: string): boolean;

@@ -1,12 +1,10 @@
-import { handle } from "./config-handler";
 import lodash from "lodash";
 import path from "path";
 import chalk from "chalk";
+import FigmaDashCore from "./index";
 
-const config = handle();
-
-export function validateFonts() {
-  if (typeof config == "boolean") return;
+function validateFonts(this: FigmaDashCore) {
+  let { config } = this;
 
   if (!config.fonts || lodash.isEmpty(config.fonts))
     throw new Error("fonts object is not valid");
@@ -51,8 +49,8 @@ export function validateFonts() {
     );
 }
 
-export function validateFigmaConfig() {
-  if (typeof config == "boolean") return;
+function validateFigmaConfig(this: FigmaDashCore) {
+  let { config } = this;
 
   if (lodash.isEmpty(config.figma))
     throw new Error("figma object is not valid");
@@ -67,4 +65,16 @@ export function validateFigmaConfig() {
     throw new Error(
       chalk.gray(config.figma.output) + " is not a valid output path"
     );
+}
+
+export default function init(thisArg: FigmaDashCore) {
+  return {
+    validateFonts: validateFonts.bind(thisArg),
+    validateFigmaConfig: validateFigmaConfig.bind(thisArg),
+  };
+}
+
+export interface Validations {
+  validateFonts: () => void;
+  validateFigmaConfig: () => void;
 }

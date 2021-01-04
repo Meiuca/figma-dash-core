@@ -3,15 +3,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateFigmaConfig = exports.validateFonts = void 0;
-const config_handler_1 = require("./config-handler");
 const lodash_1 = __importDefault(require("lodash"));
 const path_1 = __importDefault(require("path"));
 const chalk_1 = __importDefault(require("chalk"));
-const config = config_handler_1.handle();
 function validateFonts() {
-    if (typeof config == "boolean")
-        return;
+    let { config } = this;
     if (!config.fonts || lodash_1.default.isEmpty(config.fonts))
         throw new Error("fonts object is not valid");
     if (typeof config.fonts.output != "string")
@@ -35,10 +31,8 @@ function validateFonts() {
             config.fonts.directLinks.some(({ src, local }) => typeof src != "string" || typeof local != "string")))
         throw new TypeError("directLinks must be an array containing '{ src: string, local: string }'");
 }
-exports.validateFonts = validateFonts;
 function validateFigmaConfig() {
-    if (typeof config == "boolean")
-        return;
+    let { config } = this;
     if (lodash_1.default.isEmpty(config.figma))
         throw new Error("figma object is not valid");
     if (typeof config.figma.accessToken != "string")
@@ -48,4 +42,10 @@ function validateFigmaConfig() {
     if (lodash_1.default.isError(path_1.default.resolve(config.figma.output)))
         throw new Error(chalk_1.default.gray(config.figma.output) + " is not a valid output path");
 }
-exports.validateFigmaConfig = validateFigmaConfig;
+function init(thisArg) {
+    return {
+        validateFonts: validateFonts.bind(thisArg),
+        validateFigmaConfig: validateFigmaConfig.bind(thisArg),
+    };
+}
+exports.default = init;

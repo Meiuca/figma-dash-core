@@ -1,12 +1,33 @@
 import chalk from "chalk";
-import { tab } from "./functions";
+import FigmaDashCore from "./index";
 
-export default function (error: Error, help?: string) {
-  error.stack =
-    (error.stack || "undefined\n").replace(/\n/g, "\n" + tab(1)) +
-    (help ? `${chalk.yellowBright("\n\n help")} ${help}\n` : "");
+export class FigmaDashError extends Error {
+  help?: string;
 
-  Object.defineProperty(error, "help", { value: help });
+  constructor(core: FigmaDashCore, message: string, help?: string) {
+    super(message);
 
-  throw error;
+    this.help = help;
+
+    if (this.stack) {
+      this.stack = this.stack.replace(/\n/g, "\n" + core.Functions.tab(1));
+    }
+
+    if (help) {
+      this.stack += `${chalk.yellowBright("\n\n help")} ${help}\n`;
+    }
+  }
 }
+
+function handler(this: FigmaDashCore, error: Error, help?: string) {
+  throw new FigmaDashError(this, error.message, help);
+}
+
+export default function init(thisArg: FigmaDashCore) {
+  return handler.bind(thisArg);
+}
+
+export type ExceptionHandler = (
+  error: Error,
+  help?: string | undefined
+) => void;
