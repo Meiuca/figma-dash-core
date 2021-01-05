@@ -28,22 +28,18 @@ const functions_1 = __importDefault(require("./functions"));
 const validations_1 = __importDefault(require("./validations"));
 class FigmaDashCore {
     constructor(config) {
-        this.FigmaDashError = exception_handler_1.FigmaDashError;
-        let error;
+        this.exceptionHandler = exception_handler_1.default;
         try {
             this.config = config || config_handler_1.handle();
         }
         catch (err) {
-            error = err;
+            this.exceptionHandler(err, "Try 'init' first");
             this.config = {};
         }
         this.path = config_handler_1.path;
-        this.exceptionHandler = exception_handler_1.default(this);
-        this.Functions = functions_1.default(this);
-        this.Validations = validations_1.default(this);
-        if (error) {
-            this.exceptionHandler(error, "Try 'init' first");
-        }
+        this.functions = functions_1.default(this);
+        this.validations = validations_1.default(this);
     }
 }
 exports.default = FigmaDashCore;
+FigmaDashCore.FigmaDashError = exception_handler_1.FigmaDashError;

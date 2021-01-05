@@ -10,7 +10,7 @@ class FigmaDashError extends Error {
         super(message);
         this.help = help;
         if (this.stack) {
-            this.stack = this.stack.replace(/\n/g, "\n" + core.Functions.tab(1));
+            this.stack = this.stack.replace(/\n/g, "\n" + core.functions.tab(1));
         }
         if (help) {
             this.stack += `${chalk_1.default.yellowBright("\n\n help")} ${help}\n`;
@@ -18,10 +18,7 @@ class FigmaDashError extends Error {
     }
 }
 exports.FigmaDashError = FigmaDashError;
-function handler(error, help) {
+function default_1(error, help) {
     throw new FigmaDashError(this, error.message, help);
 }
-function init(thisArg) {
-    return handler.bind(thisArg);
-}
-exports.default = init;
+exports.default = default_1;

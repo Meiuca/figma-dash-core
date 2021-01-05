@@ -10,7 +10,7 @@ export class FigmaDashError extends Error {
     this.help = help;
 
     if (this.stack) {
-      this.stack = this.stack.replace(/\n/g, "\n" + core.Functions.tab(1));
+      this.stack = this.stack.replace(/\n/g, "\n" + core.functions.tab(1));
     }
 
     if (help) {
@@ -19,15 +19,6 @@ export class FigmaDashError extends Error {
   }
 }
 
-function handler(this: FigmaDashCore, error: Error, help?: string) {
+export default function (this: FigmaDashCore, error: Error, help?: string) {
   throw new FigmaDashError(this, error.message, help);
 }
-
-export default function init(thisArg: FigmaDashCore) {
-  return handler.bind(thisArg);
-}
-
-export type ExceptionHandler = (
-  error: Error,
-  help?: string | undefined
-) => void;
