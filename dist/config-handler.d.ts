@@ -1,4 +1,4 @@
-export declare const path: string;
+export declare function getPath(): string;
 export declare function handle(): FigmaDashConfig & FigmaDashModules;
 export interface DirectLink {
     src: string;

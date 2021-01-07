@@ -15,7 +15,7 @@ class FigmaDashCore {
         catch (err) {
             throw new exception_handler_1.default(err, "Try 'init' first");
         }
-        this.path = config_handler_1.path;
+        this.path = config_handler_1.getPath();
         this.functions = functions_1.default(this);
         this.validations = validations_1.default(this);
     }
