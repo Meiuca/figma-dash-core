@@ -1,9 +1,11 @@
 import { resolve } from "path";
 
-export const path = resolve(process.cwd(), `./figma-dash.config.js`);
+export function getPath() {
+  return resolve(process.cwd(), `./figma-dash.config.js`);
+}
 
 export function handle(): FigmaDashConfig & FigmaDashModules {
-  return require(path);
+  return require(getPath());
 }
 
 export interface DirectLink {

@@ -2,7 +2,7 @@ import {
   FigmaDashConfig,
   FigmaDashModules,
   handle,
-  path,
+  getPath,
 } from "./config-handler";
 
 import FigmaDashError from "./exception-handler";
@@ -26,7 +26,7 @@ export default class FigmaDashCore {
       throw new FigmaDashError(err, "Try 'init' first");
     }
 
-    this.path = path;
+    this.path = getPath();
     this.functions = InitFunctions(this);
     this.validations = InitValidations(this);
   }
