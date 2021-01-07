@@ -3,22 +3,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FigmaDashError = void 0;
 const chalk_1 = __importDefault(require("chalk"));
 class FigmaDashError extends Error {
-    constructor(core, message, help) {
-        super(message);
+    constructor(error, help) {
+        super(error.message);
+        this.name = `FigmaDashError: ${error.name}`;
+        this.stack = error.stack;
         this.help = help;
         if (this.stack) {
-            this.stack = this.stack.replace(/\n/g, "\n" + core.functions.tab(1));
+            this.stack = this.stack.replace(/\n/g, "\n\t");
         }
         if (help) {
-            this.stack += `${chalk_1.default.yellowBright("\n\n help")} ${help}\n`;
+            this.stack += `\n\n ${chalk_1.default.yellowBright("help")} ${help}\n`;
         }
     }
 }
-exports.FigmaDashError = FigmaDashError;
-function default_1(error, help) {
-    throw new FigmaDashError(this, error.message, help);
-}
-exports.default = default_1;
+exports.default = FigmaDashError;

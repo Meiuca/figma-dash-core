@@ -4,11 +4,6 @@ exports.handle = exports.path = void 0;
 const path_1 = require("path");
 exports.path = path_1.resolve(process.cwd(), `./figma-dash.config.js`);
 function handle() {
-    try {
-        return require(exports.path);
-    }
-    catch (err) {
-        throw err;
-    }
+    return require(exports.path);
 }
 exports.handle = handle;

@@ -3,11 +3,7 @@ import { resolve } from "path";
 export const path = resolve(process.cwd(), `./figma-dash.config.js`);
 
 export function handle(): FigmaDashConfig & FigmaDashModules {
-  try {
-    return require(path);
-  } catch (err) {
-    throw err;
-  }
+  return require(path);
 }
 
 export interface DirectLink {
