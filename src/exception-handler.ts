@@ -3,11 +3,15 @@ import chalk from "chalk";
 export default class FigmaDashError extends Error {
   help?: string;
 
-  constructor(error: Error, help?: string) {
-    super(error.message);
+  constructor(error: Error | string, help?: string) {
+    if (error instanceof Error) super(error.message);
+    else super(error);
 
-    this.name = `FigmaDashError: ${error.name}`;
-    this.stack = error.stack;
+    let name = error instanceof Error ? error.name : error;
+    let stack = error instanceof Error ? error.stack : this.stack;
+
+    this.name = `FigmaDashError: ${name}`;
+    this.stack = stack;
     this.help = help;
 
     if (this.stack) {
