@@ -1,9 +1,14 @@
-const config = {
-  patterns: { childContainerTokenIdentifier: /./ },
-  figma: { accessToken: "", fileID: "", output: "./" },
-};
-
-const x = new (require("figma-dash-core").default)(config);
+const x = new (require("../dist").default)({
+  patterns: {
+    childContainerTokenIdentifier: /./,
+  },
+  figma: {
+    output: "",
+    accessToken: "",
+    src: "https://www.figma.com/file/dvvvfvfvfdd/",
+  },
+  fonts: { output: "", provider: "http{f}{w}" },
+});
 
 console.log(x.functions.depth([[]]));
 console.log(x.functions.childContainerTokenRegexTest("x"));
@@ -13,10 +18,9 @@ console.log(x.functions.tokenValueRegexTest(""));
 console.log(x.path);
 console.log(x.config);
 
-try {
-  x.exceptionHandler(new Error("eaeeee"), "troxa");
-} catch (err) {
-  console.log(err.name);
-  console.log(err.stack);
-  console.log(err.help);
-}
+x.validations.validateFigmaConfig();
+x.validations.validateFonts();
+
+console.log(x.functions.parseFigmaSrc(x.config.figma.src));
+
+console.log(new (require("../dist").FigmaDashError)(new Error()).help);

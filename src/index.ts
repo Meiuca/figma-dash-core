@@ -11,13 +11,13 @@ import InitFunctions, { Functions } from "./functions";
 
 import InitValidations, { Validations } from "./validations";
 
+export { default as FigmaDashError } from "./exception-handler";
+
 export default class FigmaDashCore {
   config: FigmaDashConfig & FigmaDashModules;
   path: string;
   functions: Functions;
   validations: Validations;
-
-  static FigmaDashError = FigmaDashError;
 
   constructor(config?: FigmaDashConfig & FigmaDashModules) {
     try {

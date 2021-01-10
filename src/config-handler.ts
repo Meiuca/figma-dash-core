@@ -25,7 +25,7 @@ export interface FigmaDashConfig {
 
   figma: {
     accessToken: string;
-    fileID: string;
+    src: string;
     output: string;
   };
 

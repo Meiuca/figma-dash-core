@@ -54,6 +54,12 @@ function childContainerTokenRegexTest(this: FigmaDashCore, key: string) {
   ).test(key);
 }
 
+function parseFigmaSrc(src: string) {
+  let parsedSrc = /figma\.com\/file\/(.+)\//.exec(src);
+
+  return parsedSrc ? (parsedSrc[1] ? parsedSrc[1] : null) : src;
+}
+
 export default function init(thisArg: FigmaDashCore) {
   return {
     tab,
@@ -61,6 +67,7 @@ export default function init(thisArg: FigmaDashCore) {
     cleanStr,
     cleanTokenValue,
     parseDeepObj,
+    parseFigmaSrc,
     tokenValueRegexTest: tokenValueRegexTest.bind(thisArg),
     parentContainerTokenRegexTest: parentContainerTokenRegexTest.bind(thisArg),
     tokenNameRegexTest: tokenNameRegexTest.bind(thisArg),
@@ -78,4 +85,5 @@ export interface Functions {
   parentContainerTokenRegexTest: (key: string) => boolean;
   tokenNameRegexTest: (key: string) => boolean;
   childContainerTokenRegexTest: (key: string) => boolean;
+  parseFigmaSrc: (src: string) => string | null;
 }

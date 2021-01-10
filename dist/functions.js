@@ -35,6 +35,10 @@ function tokenNameRegexTest(key) {
 function childContainerTokenRegexTest(key) {
     return ((this.config.patterns || {}).childContainerTokenIdentifier || /^:{1}/).test(key);
 }
+function parseFigmaSrc(src) {
+    let parsedSrc = /figma\.com\/file\/(.+)\//.exec(src);
+    return parsedSrc ? (parsedSrc[1] ? parsedSrc[1] : null) : src;
+}
 function init(thisArg) {
     return {
         tab,
@@ -42,6 +46,7 @@ function init(thisArg) {
         cleanStr,
         cleanTokenValue,
         parseDeepObj,
+        parseFigmaSrc,
         tokenValueRegexTest: tokenValueRegexTest.bind(thisArg),
         parentContainerTokenRegexTest: parentContainerTokenRegexTest.bind(thisArg),
         tokenNameRegexTest: tokenNameRegexTest.bind(thisArg),
