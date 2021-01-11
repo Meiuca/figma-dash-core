@@ -33,24 +33,28 @@ function parseDeepObj(obj: object) {
 
 function tokenValueRegexTest(this: FigmaDashCore, key: string) {
   return (
-    (this.config.patterns || {}).tokenValueIdentifier ||
+    (this.config.globals.patterns || {}).tokenValueIdentifier ||
     /^#|^~|\d+(?=px|rem|em|%|\.\d+)/
   ).test(key);
 }
 
 function parentContainerTokenRegexTest(this: FigmaDashCore, key: string) {
   return (
-    (this.config.patterns || {}).parentContainerTokenIdentifier || /^:{2}/
+    (this.config.globals.patterns || {}).parentContainerTokenIdentifier ||
+    /^:{2}/
   ).test(key);
 }
 
 function tokenNameRegexTest(this: FigmaDashCore, key: string) {
-  return ((this.config.patterns || {}).tokenNameIdentifier || /^\$/).test(key);
+  return (
+    (this.config.globals.patterns || {}).tokenNameIdentifier || /^\$/
+  ).test(key);
 }
 
 function childContainerTokenRegexTest(this: FigmaDashCore, key: string) {
   return (
-    (this.config.patterns || {}).childContainerTokenIdentifier || /^:{1}/
+    (this.config.globals.patterns || {}).childContainerTokenIdentifier ||
+    /^:{1}/
   ).test(key);
 }
 
