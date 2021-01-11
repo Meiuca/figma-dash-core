@@ -23,17 +23,19 @@ function parseDeepObj(obj) {
     return mappedObj.flat(depth(mappedObj));
 }
 function tokenValueRegexTest(key) {
-    return ((this.config.patterns || {}).tokenValueIdentifier ||
+    return ((this.config.globals.patterns || {}).tokenValueIdentifier ||
         /^#|^~|\d+(?=px|rem|em|%|\.\d+)/).test(key);
 }
 function parentContainerTokenRegexTest(key) {
-    return ((this.config.patterns || {}).parentContainerTokenIdentifier || /^:{2}/).test(key);
+    return ((this.config.globals.patterns || {}).parentContainerTokenIdentifier ||
+        /^:{2}/).test(key);
 }
 function tokenNameRegexTest(key) {
-    return ((this.config.patterns || {}).tokenNameIdentifier || /^\$/).test(key);
+    return ((this.config.globals.patterns || {}).tokenNameIdentifier || /^\$/).test(key);
 }
 function childContainerTokenRegexTest(key) {
-    return ((this.config.patterns || {}).childContainerTokenIdentifier || /^:{1}/).test(key);
+    return ((this.config.globals.patterns || {}).childContainerTokenIdentifier ||
+        /^:{1}/).test(key);
 }
 function parseFigmaSrc(src) {
     let parsedSrc = /figma\.com\/file\/(.+)\//.exec(src);

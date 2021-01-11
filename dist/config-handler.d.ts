@@ -5,15 +5,15 @@ export interface DirectLink {
     local: string;
 }
 export interface FigmaDashConfig {
-    patterns?: {
-        tokenNameIdentifier?: RegExp;
-        tokenValueIdentifier?: RegExp;
-        parentContainerTokenIdentifier?: RegExp;
-        childContainerTokenIdentifier?: RegExp;
-    };
     globals: {
         ds?: string;
         tokenNameModel?: "classic" | "inverted";
+        patterns?: {
+            tokenNameIdentifier?: RegExp;
+            tokenValueIdentifier?: RegExp;
+            parentContainerTokenIdentifier?: RegExp;
+            childContainerTokenIdentifier?: RegExp;
+        };
     };
     figma: {
         accessToken: string;
