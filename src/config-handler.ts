@@ -21,7 +21,11 @@ export interface FigmaDashConfig {
     childContainerTokenIdentifier?: RegExp;
   };
 
-  ds?: string;
+  globals: {
+    ds?: string;
+
+    tokenNameModel?: "classic" | "inverted";
+  };
 
   figma: {
     accessToken: string;
