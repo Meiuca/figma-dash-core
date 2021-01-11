@@ -14,6 +14,8 @@ class FigmaDashCore {
     constructor(config) {
         try {
             this.config = config || config_handler_1.handle();
+            if (!this.config.globals)
+                this.config.globals = {};
         }
         catch (err) {
             throw new exception_handler_1.default(err, "Try 'init' first");
