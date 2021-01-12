@@ -1,6 +1,8 @@
 const x = new (require("../dist").default)({
-  patterns: {
-    childContainerTokenIdentifier: /./,
+  globals: {
+    patterns: {
+      childContainerTokenIdentifier: /./,
+    },
   },
   figma: {
     output: "",
@@ -14,7 +16,7 @@ console.log(x.functions.depth([[]]));
 console.log(x.functions.childContainerTokenRegexTest("x"));
 console.log(x.functions.parentContainerTokenRegexTest(""));
 console.log(x.functions.tokenNameRegexTest(""));
-console.log(x.functions.tokenValueRegexTest(""));
+console.log(x.functions.tokenValueRegexTest("#fff"));
 console.log(x.path);
 console.log(x.config);
 

@@ -21,9 +21,7 @@ export default class FigmaDashCore {
 
   constructor(config?: FigmaDashConfig & FigmaDashModules) {
     try {
-      this.config = config || handle();
-
-      if (!this.config.globals) this.config.globals = {};
+      this.config = handle(config);
     } catch (err) {
       throw new FigmaDashError(err, "Try 'init' first");
     }

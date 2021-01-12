@@ -1,20 +1,21 @@
 export declare function getPath(): string;
-export declare function handle(): FigmaDashConfig & FigmaDashModules;
+export declare function handle(config?: FigmaDashConfig & FigmaDashModules): FigmaDashConfig & FigmaDashModules;
 export interface DirectLink {
     src: string;
     local: string;
 }
-export interface FigmaDashConfig {
-    globals: {
-        ds?: string;
-        tokenNameModel?: "classic" | "inverted";
-        patterns?: {
-            tokenNameIdentifier?: RegExp;
-            tokenValueIdentifier?: RegExp;
-            parentContainerTokenIdentifier?: RegExp;
-            childContainerTokenIdentifier?: RegExp;
-        };
+export interface Globals {
+    ds?: string;
+    tokenNameModel?: "classic" | "inverted";
+    patterns: {
+        tokenNameIdentifier: RegExp;
+        tokenValueIdentifier: RegExp;
+        parentContainerTokenIdentifier: RegExp;
+        childContainerTokenIdentifier: RegExp;
     };
+}
+export interface FigmaDashConfig {
+    globals: Globals;
     figma: {
         accessToken: string;
         src: string;

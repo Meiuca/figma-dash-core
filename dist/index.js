@@ -13,9 +13,7 @@ Object.defineProperty(exports, "FigmaDashError", { enumerable: true, get: functi
 class FigmaDashCore {
     constructor(config) {
         try {
-            this.config = config || config_handler_1.handle();
-            if (!this.config.globals)
-                this.config.globals = {};
+            this.config = config_handler_1.handle(config);
         }
         catch (err) {
             throw new exception_handler_1.default(err, "Try 'init' first");

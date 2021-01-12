@@ -1,11 +1,27 @@
+import { merge } from "lodash";
 import { resolve } from "path";
 
 export function getPath() {
   return resolve(process.cwd(), `./figma-dash.config.js`);
 }
 
-export function handle(): FigmaDashConfig & FigmaDashModules {
-  return require(getPath());
+export function handle(config?: FigmaDashConfig & FigmaDashModules) {
+  if (!config) {
+    config = require(getPath());
+  }
+
+  let defaultConfig = {
+    globals: {
+      patterns: {
+        tokenNameIdentifier: /^\$/,
+        tokenValueIdentifier: /^#|^--|\d+(?=px|rem|em|%|\.\d+)/,
+        parentContainerTokenIdentifier: /^:{2}/,
+        childContainerTokenIdentifier: /(\w+):\W*(\w+)/,
+      },
+    },
+  };
+
+  return merge(defaultConfig, config) as FigmaDashConfig & FigmaDashModules;
 }
 
 export interface DirectLink {
@@ -13,19 +29,21 @@ export interface DirectLink {
   local: string;
 }
 
-export interface FigmaDashConfig {
-  globals: {
-    ds?: string;
+export interface Globals {
+  ds?: string;
 
-    tokenNameModel?: "classic" | "inverted";
+  tokenNameModel?: "classic" | "inverted";
 
-    patterns?: {
-      tokenNameIdentifier?: RegExp;
-      tokenValueIdentifier?: RegExp;
-      parentContainerTokenIdentifier?: RegExp;
-      childContainerTokenIdentifier?: RegExp;
-    };
+  patterns: {
+    tokenNameIdentifier: RegExp;
+    tokenValueIdentifier: RegExp;
+    parentContainerTokenIdentifier: RegExp;
+    childContainerTokenIdentifier: RegExp;
   };
+}
+
+export interface FigmaDashConfig {
+  globals: Globals;
 
   figma: {
     accessToken: string;
