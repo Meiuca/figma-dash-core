@@ -68,6 +68,7 @@ export interface MeiucaEngineModules {
 
 export interface MeiucaEngineModule {
   filter?: string | object;
+  transforms?: string[];
 
   tokens: {
     output: {
