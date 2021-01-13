@@ -34,9 +34,9 @@ export interface MeiucaEngineModules {
     [module: string]: MeiucaEngineModule;
 }
 export interface MeiucaEngineModule {
-    filter?: string | object;
-    transforms?: string[];
     tokens: {
+        filter?: string | object;
+        transforms?: string[];
         output: {
             dir: string;
             extension?: string;
