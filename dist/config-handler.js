@@ -11,7 +11,7 @@ function handle(config) {
     if (!config) {
         config = require(getPath());
     }
-    let def = {
+    let defaultConfig = {
         globals: {
             patterns: {
                 tokenNameIdentifier: /^\$/,
@@ -21,6 +21,6 @@ function handle(config) {
             },
         },
     };
-    return lodash_1.merge(def, config);
+    return lodash_1.merge(defaultConfig, config);
 }
 exports.handle = handle;
