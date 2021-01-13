@@ -63,10 +63,10 @@ export interface MeiucaEngineConfig {
 }
 
 export interface MeiucaEngineModules {
-  [module: string]: FigmaDashModule;
+  [module: string]: MeiucaEngineModule;
 }
 
-export interface FigmaDashModule {
+export interface MeiucaEngineModule {
   filter?: string | object;
 
   tokens: {
