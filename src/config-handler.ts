@@ -2,10 +2,10 @@ import { merge } from "lodash";
 import { resolve } from "path";
 
 export function getPath() {
-  return resolve(process.cwd(), `./figma-dash.config.js`);
+  return resolve(process.cwd(), `./meiuca-engine.config.js`);
 }
 
-export function handle(config?: FigmaDashConfig & FigmaDashModules) {
+export function handle(config?: MeiucaEngineConfig & MeiucaEngineModules) {
   if (!config) {
     config = require(getPath());
   }
@@ -21,7 +21,8 @@ export function handle(config?: FigmaDashConfig & FigmaDashModules) {
     },
   };
 
-  return merge(defaultConfig, config) as FigmaDashConfig & FigmaDashModules;
+  return merge(defaultConfig, config) as MeiucaEngineConfig &
+    MeiucaEngineModules;
 }
 
 export interface DirectLink {
@@ -42,7 +43,7 @@ export interface Globals {
   };
 }
 
-export interface FigmaDashConfig {
+export interface MeiucaEngineConfig {
   globals: Globals;
 
   figma: {
@@ -61,7 +62,7 @@ export interface FigmaDashConfig {
   };
 }
 
-export interface FigmaDashModules {
+export interface MeiucaEngineModules {
   [module: string]: FigmaDashModule;
 }
 

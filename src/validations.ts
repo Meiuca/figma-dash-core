@@ -1,7 +1,7 @@
 import lodash from "lodash";
-import FigmaDashCore from "./index";
+import MeiucaEngineCore from "./index";
 
-function validateFonts(this: FigmaDashCore) {
+function validateFonts(this: MeiucaEngineCore) {
   let {
     config: { fonts },
   } = this;
@@ -45,7 +45,7 @@ function validateFonts(this: FigmaDashCore) {
     );
 }
 
-function validateFigmaConfig(this: FigmaDashCore) {
+function validateFigmaConfig(this: MeiucaEngineCore) {
   let {
     config: { figma },
   } = this;
@@ -62,7 +62,7 @@ function validateFigmaConfig(this: FigmaDashCore) {
     throw new TypeError("figma.output must be a string");
 }
 
-export default function init(thisArg: FigmaDashCore) {
+export default function init(thisArg: MeiucaEngineCore) {
   return {
     validateFonts: validateFonts.bind(thisArg),
     validateFigmaConfig: validateFigmaConfig.bind(thisArg),

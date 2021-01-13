@@ -1,5 +1,5 @@
-import FigmaDashCore from "./index";
-export default function init(thisArg: FigmaDashCore): {
+import MeiucaEngineCore from "./index";
+export default function init(thisArg: MeiucaEngineCore): {
     validateFonts: () => void;
     validateFigmaConfig: () => void;
 };

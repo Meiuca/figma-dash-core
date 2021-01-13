@@ -1,5 +1,5 @@
 export declare function getPath(): string;
-export declare function handle(config?: FigmaDashConfig & FigmaDashModules): FigmaDashConfig & FigmaDashModules;
+export declare function handle(config?: MeiucaEngineConfig & MeiucaEngineModules): MeiucaEngineConfig & MeiucaEngineModules;
 export interface DirectLink {
     src: string;
     local: string;
@@ -14,7 +14,7 @@ export interface Globals {
         childContainerTokenIdentifier: RegExp;
     };
 }
-export interface FigmaDashConfig {
+export interface MeiucaEngineConfig {
     globals: Globals;
     figma: {
         accessToken: string;
@@ -30,7 +30,7 @@ export interface FigmaDashConfig {
         directLinks?: DirectLink[];
     };
 }
-export interface FigmaDashModules {
+export interface MeiucaEngineModules {
     [module: string]: FigmaDashModule;
 }
 export interface FigmaDashModule {

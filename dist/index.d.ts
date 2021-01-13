@@ -1,11 +1,11 @@
-import { FigmaDashConfig, FigmaDashModules } from "./config-handler";
+import { MeiucaEngineConfig, MeiucaEngineModules } from "./config-handler";
 import { Functions } from "./functions";
 import { Validations } from "./validations";
-export { default as FigmaDashError } from "./exception-handler";
-export default class FigmaDashCore {
-    config: FigmaDashConfig & FigmaDashModules;
+export { default as MeiucaEngineError } from "./exception-handler";
+export default class MeiucaEngineCore {
+    config: MeiucaEngineConfig & MeiucaEngineModules;
     path: string;
     functions: Functions;
     validations: Validations;
-    constructor(config?: FigmaDashConfig & FigmaDashModules);
+    constructor(config?: MeiucaEngineConfig & MeiucaEngineModules);
 }

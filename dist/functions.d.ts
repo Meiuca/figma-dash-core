@@ -1,11 +1,11 @@
-import FigmaDashCore from "./index";
+import MeiucaEngineCore from "./index";
 declare function tab(count: number): string;
 declare function depth(array: any[]): number;
 declare function cleanStr(str: string): string;
 declare function cleanTokenValue(str: string): string;
 declare function parseDeepObj(obj: object): any[];
 declare function parseFigmaSrc(src: string): string | null;
-export default function init(thisArg: FigmaDashCore): {
+export default function init(thisArg: MeiucaEngineCore): {
     tab: typeof tab;
     depth: typeof depth;
     cleanStr: typeof cleanStr;

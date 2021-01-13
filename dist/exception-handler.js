@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const chalk_1 = __importDefault(require("chalk"));
-class FigmaDashError extends Error {
+class MeiucaEngineError extends Error {
     constructor(error, help) {
         if (error instanceof Error)
             super(error.message);
@@ -23,4 +23,4 @@ class FigmaDashError extends Error {
         }
     }
 }
-exports.default = FigmaDashError;
+exports.default = MeiucaEngineError;

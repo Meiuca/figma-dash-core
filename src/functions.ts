@@ -1,4 +1,4 @@
-import FigmaDashCore from "./index";
+import MeiucaEngineCore from "./index";
 
 function tab(count: number) {
   return "\t".repeat(count);
@@ -31,19 +31,19 @@ function parseDeepObj(obj: object) {
   return mappedObj.flat(depth(mappedObj));
 }
 
-function tokenValueRegexTest(this: FigmaDashCore, key: string) {
+function tokenValueRegexTest(this: MeiucaEngineCore, key: string) {
   return this.config.globals.patterns.tokenValueIdentifier.test(key);
 }
 
-function parentContainerTokenRegexTest(this: FigmaDashCore, key: string) {
+function parentContainerTokenRegexTest(this: MeiucaEngineCore, key: string) {
   return this.config.globals.patterns.parentContainerTokenIdentifier.test(key);
 }
 
-function tokenNameRegexTest(this: FigmaDashCore, key: string) {
+function tokenNameRegexTest(this: MeiucaEngineCore, key: string) {
   return this.config.globals.patterns.tokenNameIdentifier.test(key);
 }
 
-function childContainerTokenRegexTest(this: FigmaDashCore, key: string) {
+function childContainerTokenRegexTest(this: MeiucaEngineCore, key: string) {
   return this.config.globals.patterns.childContainerTokenIdentifier.test(key);
 }
 
@@ -53,7 +53,7 @@ function parseFigmaSrc(src: string) {
   return parsedSrc ? (parsedSrc[1] ? parsedSrc[1] : null) : src;
 }
 
-export default function init(thisArg: FigmaDashCore) {
+export default function init(thisArg: MeiucaEngineCore) {
   return {
     tab,
     depth,
