@@ -12,7 +12,7 @@ class MeiucaEngineError extends Error {
             super(error);
         let name = error instanceof Error ? error.name : error;
         let stack = error instanceof Error ? error.stack : this.stack;
-        this.name = `FigmaDashError: ${name}`;
+        this.name = `MeiucaEngineError: ${name}`;
         this.stack = stack;
         this.help = help;
         if (this.stack) {
