@@ -1,22 +1,5 @@
 import MeiucaEngineCore from "./index";
-declare function tab(count: number): string;
-declare function depth(array: any[]): number;
-declare function cleanStr(str: string): string;
-declare function cleanTokenValue(str: string): string;
-declare function parseDeepObj(obj: object): any[];
-declare function parseFigmaSrc(src: string): string | null;
-export default function init(thisArg: MeiucaEngineCore): {
-    tab: typeof tab;
-    depth: typeof depth;
-    cleanStr: typeof cleanStr;
-    cleanTokenValue: typeof cleanTokenValue;
-    parseDeepObj: typeof parseDeepObj;
-    parseFigmaSrc: typeof parseFigmaSrc;
-    tokenValueRegexTest: (key: string) => boolean;
-    parentContainerTokenRegexTest: (key: string) => boolean;
-    tokenNameRegexTest: (key: string) => boolean;
-    childContainerTokenRegexTest: (key: string) => boolean;
-};
+export default function init(thisArg: MeiucaEngineCore): Functions;
 export interface Functions {
     tab: (count: number) => string;
     depth: (array: any[]) => number;
@@ -27,6 +10,9 @@ export interface Functions {
     parentContainerTokenRegexTest: (key: string) => boolean;
     tokenNameRegexTest: (key: string) => boolean;
     childContainerTokenRegexTest: (key: string) => boolean;
+    tokenValueRegexExec: (key: string) => RegExpExecArray | null;
+    parentContainerTokenRegexExec: (key: string) => RegExpExecArray | null;
+    tokenNameRegexExec: (key: string) => RegExpExecArray | null;
+    childContainerTokenRegexExec: (key: string) => RegExpExecArray | null;
     parseFigmaSrc: (src: string) => string | null;
 }
-export {};

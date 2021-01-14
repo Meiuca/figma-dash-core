@@ -20,7 +20,7 @@ function cleanStr(str: string) {
 }
 
 function cleanTokenValue(str: string) {
-  return str.replace(/[^A-Za-z0-9.,'\(\)%#\s]/g, "").replace(/^\s+|\s+$/g, "");
+  return str.replace(/[^A-Za-z0-9.,'\(\)%#\s]/g, "").trim();
 }
 
 function parseDeepObj(obj: object) {
@@ -35,16 +35,32 @@ function tokenValueRegexTest(this: MeiucaEngineCore, key: string) {
   return this.config.globals.patterns.tokenValueIdentifier.test(key);
 }
 
+function tokenValueRegexExec(this: MeiucaEngineCore, key: string) {
+  return this.config.globals.patterns.tokenValueIdentifier.exec(key);
+}
+
 function parentContainerTokenRegexTest(this: MeiucaEngineCore, key: string) {
   return this.config.globals.patterns.parentContainerTokenIdentifier.test(key);
+}
+
+function parentContainerTokenRegexExec(this: MeiucaEngineCore, key: string) {
+  return this.config.globals.patterns.parentContainerTokenIdentifier.exec(key);
 }
 
 function tokenNameRegexTest(this: MeiucaEngineCore, key: string) {
   return this.config.globals.patterns.tokenNameIdentifier.test(key);
 }
 
+function tokenNameRegexExec(this: MeiucaEngineCore, key: string) {
+  return this.config.globals.patterns.tokenNameIdentifier.exec(key);
+}
+
 function childContainerTokenRegexTest(this: MeiucaEngineCore, key: string) {
   return this.config.globals.patterns.childContainerTokenIdentifier.test(key);
+}
+
+function childContainerTokenRegexExec(this: MeiucaEngineCore, key: string) {
+  return this.config.globals.patterns.childContainerTokenIdentifier.exec(key);
 }
 
 function parseFigmaSrc(src: string) {
@@ -53,7 +69,7 @@ function parseFigmaSrc(src: string) {
   return parsedSrc ? (parsedSrc[1] ? parsedSrc[1] : null) : src;
 }
 
-export default function init(thisArg: MeiucaEngineCore) {
+export default function init(thisArg: MeiucaEngineCore): Functions {
   return {
     tab,
     depth,
@@ -65,6 +81,10 @@ export default function init(thisArg: MeiucaEngineCore) {
     parentContainerTokenRegexTest: parentContainerTokenRegexTest.bind(thisArg),
     tokenNameRegexTest: tokenNameRegexTest.bind(thisArg),
     childContainerTokenRegexTest: childContainerTokenRegexTest.bind(thisArg),
+    tokenValueRegexExec: tokenValueRegexExec.bind(thisArg),
+    parentContainerTokenRegexExec: parentContainerTokenRegexExec.bind(thisArg),
+    tokenNameRegexExec: tokenNameRegexExec.bind(thisArg),
+    childContainerTokenRegexExec: childContainerTokenRegexExec.bind(thisArg),
   };
 }
 
@@ -78,5 +98,9 @@ export interface Functions {
   parentContainerTokenRegexTest: (key: string) => boolean;
   tokenNameRegexTest: (key: string) => boolean;
   childContainerTokenRegexTest: (key: string) => boolean;
+  tokenValueRegexExec: (key: string) => RegExpExecArray | null;
+  parentContainerTokenRegexExec: (key: string) => RegExpExecArray | null;
+  tokenNameRegexExec: (key: string) => RegExpExecArray | null;
+  childContainerTokenRegexExec: (key: string) => RegExpExecArray | null;
   parseFigmaSrc: (src: string) => string | null;
 }

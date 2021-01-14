@@ -62,7 +62,7 @@ function validateFigmaConfig(this: MeiucaEngineCore) {
     throw new TypeError("figma.output must be a string");
 }
 
-export default function init(thisArg: MeiucaEngineCore) {
+export default function init(thisArg: MeiucaEngineCore): Validations {
   return {
     validateFonts: validateFonts.bind(thisArg),
     validateFigmaConfig: validateFigmaConfig.bind(thisArg),
