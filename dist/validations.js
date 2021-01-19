@@ -4,22 +4,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const lodash_1 = __importDefault(require("lodash"));
+const fontProviderRegExp = /^https?:\/\/\S*((\{f\})|(\{w\}))\S*((\{f\})|(\{w\}))\S*$/;
+const figmaSrcRegExp = /(figma\.com\/file\/.+\/)|(^\w+$)/;
 function validateFonts() {
-    let { config: { fonts }, } = this;
-    if (!fonts)
+    let { fonts } = this;
+    if (lodash_1.default.isEmpty(fonts))
         throw new Error("fonts object is not valid");
-    if (typeof fonts.output != "string")
+    if (!fonts.output || typeof fonts.output != "string")
         throw new TypeError("fonts.output must be declared and must be a string");
     if (fonts.linkCommand && typeof fonts.linkCommand != "string")
         throw new TypeError("fonts.linkCommand must be a string");
-    if (fonts.files && !fonts.provider)
-        throw new TypeError("fonts.provider must be declared");
-    if (typeof fonts.provider != "string" || !fonts.provider.includes("http"))
-        throw new Error("fonts.provider is not a valid url");
-    if (!fonts.provider.includes("{f}"))
-        throw new SyntaxError("fonts.provider must include '{f}'");
-    if (!fonts.provider.includes("{w}"))
-        throw new SyntaxError("fonts.provider must include '{w}'");
     if (fonts.urls &&
         (!Array.isArray(fonts.urls) ||
             fonts.urls.some((url) => typeof url != "string")))
@@ -28,22 +22,26 @@ function validateFonts() {
         (!Array.isArray(fonts.directLinks) ||
             fonts.directLinks.some(({ src, local }) => typeof src != "string" || typeof local != "string")))
         throw new TypeError("fonts.directLinks must be { src: string, local: string }[]");
+    if (fonts.files && !fonts.provider)
+        throw new Error("fonts.provider must be declared");
+    if (fonts.provider && !fontProviderRegExp.test(fonts.provider))
+        throw new Error("fonts.provider must be a valid url and include both '{f}' and '{w}'");
 }
 function validateFigmaConfig() {
-    let { config: { figma }, } = this;
+    let { figma } = this;
     if (lodash_1.default.isEmpty(figma))
         throw new Error("figma object is not valid");
-    if (typeof figma.accessToken != "string")
-        throw new TypeError("figma.accessToken must be a string");
-    if (!figma.src || !/(figma\.com\/file\/.+\/)|(^\w+$)/.test(figma.src))
-        throw new TypeError("figma.src is not a valid Figma URL or Figma File ID");
-    if (typeof figma.output != "string")
+    if (!figma.accessToken || typeof figma.accessToken != "string")
+        throw new Error("figma.accessToken must be a string");
+    if (typeof figma.src != "string" || !figmaSrcRegExp.test(figma.src))
+        throw new Error("figma.src is not a valid Figma URL or Figma File ID");
+    if (!figma.output || typeof figma.output != "string")
         throw new TypeError("figma.output must be a string");
 }
 function init(thisArg) {
     return {
-        validateFonts: validateFonts.bind(thisArg),
-        validateFigmaConfig: validateFigmaConfig.bind(thisArg),
+        validateFonts: validateFonts.bind(thisArg.config),
+        validateFigmaConfig: validateFigmaConfig.bind(thisArg.config),
     };
 }
 exports.default = init;

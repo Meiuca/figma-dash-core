@@ -5,7 +5,7 @@ export function getPath() {
   return resolve(process.cwd(), `./meiuca-engine.config.js`);
 }
 
-export function handle(config?: MeiucaEngineConfig & MeiucaEngineModules) {
+export function handle(config?: MeiucaEngineUserConfig & MeiucaEngineModules) {
   if (!config) {
     config = require(getPath());
   }
@@ -18,6 +18,15 @@ export function handle(config?: MeiucaEngineConfig & MeiucaEngineModules) {
         parentContainerTokenIdentifier: /^:{2}/,
         childContainerTokenIdentifier: /(\w+):\W*(\w+)/,
       },
+      tokenNameModel: "classic",
+    },
+    figma: {
+      output: "./tokens/",
+    },
+    fonts: {
+      files: true,
+      output: "./assets/",
+      provider: "https://fonts.googleapis.com/css2?family={f}:wght@{w}",
     },
   };
 
@@ -33,7 +42,7 @@ export interface DirectLink {
 export interface Globals {
   ds?: string;
 
-  tokenNameModel?: "classic" | "inverted";
+  tokenNameModel: "classic" | "inverted";
 
   patterns: {
     tokenNameIdentifier: RegExp;
@@ -52,7 +61,7 @@ export interface MeiucaEngineConfig {
     output: string;
   };
 
-  fonts?: {
+  fonts: {
     output: string;
     linkCommand?: string;
     provider: string;
@@ -82,5 +91,37 @@ export interface MeiucaEngineModule {
       include?: string;
       filter?: string | object;
     }[];
+  };
+}
+
+export interface UserGlobals {
+  ds?: string;
+
+  tokenNameModel?: "classic" | "inverted";
+
+  patterns?: {
+    tokenNameIdentifier?: RegExp;
+    tokenValueIdentifier?: RegExp;
+    parentContainerTokenIdentifier?: RegExp;
+    childContainerTokenIdentifier?: RegExp;
+  };
+}
+
+export interface MeiucaEngineUserConfig {
+  globals: UserGlobals;
+
+  figma: {
+    accessToken: string;
+    src: string;
+    output: string;
+  };
+
+  fonts?: {
+    output: string;
+    linkCommand?: string;
+    provider: string;
+    files: boolean;
+    urls?: string[];
+    directLinks?: DirectLink[];
   };
 }

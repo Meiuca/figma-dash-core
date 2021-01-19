@@ -1,16 +1,4 @@
-const x = new (require("../dist").default)({
-  globals: {
-    patterns: {
-      childContainerTokenIdentifier: /./,
-    },
-  },
-  figma: {
-    output: "",
-    accessToken: "",
-    src: "https://www.figma.com/file/dvvvfvfvfdd/",
-  },
-  fonts: { output: "", provider: "http{f}{w}" },
-});
+const x = new (require("../dist").default)();
 
 console.log(x.functions.depth([[]]));
 console.log(x.functions.childContainerTokenRegexTest("x"));
@@ -25,4 +13,4 @@ x.validations.validateFonts();
 
 console.log(x.functions.parseFigmaSrc(x.config.figma.src));
 
-console.log(new (require("../dist").FigmaDashError)(new Error()).help);
+console.log(new (require("../dist").MeiucaEngineError)(new Error()).help);

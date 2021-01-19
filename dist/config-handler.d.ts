@@ -1,12 +1,12 @@
 export declare function getPath(): string;
-export declare function handle(config?: MeiucaEngineConfig & MeiucaEngineModules): MeiucaEngineConfig & MeiucaEngineModules;
+export declare function handle(config?: MeiucaEngineUserConfig & MeiucaEngineModules): MeiucaEngineConfig & MeiucaEngineModules;
 export interface DirectLink {
     src: string;
     local: string;
 }
 export interface Globals {
     ds?: string;
-    tokenNameModel?: "classic" | "inverted";
+    tokenNameModel: "classic" | "inverted";
     patterns: {
         tokenNameIdentifier: RegExp;
         tokenValueIdentifier: RegExp;
@@ -21,7 +21,7 @@ export interface MeiucaEngineConfig {
         src: string;
         output: string;
     };
-    fonts?: {
+    fonts: {
         output: string;
         linkCommand?: string;
         provider: string;
@@ -48,5 +48,31 @@ export interface MeiucaEngineModule {
             include?: string;
             filter?: string | object;
         }[];
+    };
+}
+export interface UserGlobals {
+    ds?: string;
+    tokenNameModel?: "classic" | "inverted";
+    patterns?: {
+        tokenNameIdentifier?: RegExp;
+        tokenValueIdentifier?: RegExp;
+        parentContainerTokenIdentifier?: RegExp;
+        childContainerTokenIdentifier?: RegExp;
+    };
+}
+export interface MeiucaEngineUserConfig {
+    globals: UserGlobals;
+    figma: {
+        accessToken: string;
+        src: string;
+        output: string;
+    };
+    fonts?: {
+        output: string;
+        linkCommand?: string;
+        provider: string;
+        files: boolean;
+        urls?: string[];
+        directLinks?: DirectLink[];
     };
 }

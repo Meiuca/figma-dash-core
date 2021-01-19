@@ -19,6 +19,15 @@ function handle(config) {
                 parentContainerTokenIdentifier: /^:{2}/,
                 childContainerTokenIdentifier: /(\w+):\W*(\w+)/,
             },
+            tokenNameModel: "classic",
+        },
+        figma: {
+            output: "./tokens/",
+        },
+        fonts: {
+            files: true,
+            output: "./assets/",
+            provider: "https://fonts.googleapis.com/css2?family={f}:wght@{w}",
         },
     };
     return lodash_1.merge(defaultConfig, config);

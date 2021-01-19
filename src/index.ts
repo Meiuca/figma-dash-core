@@ -1,8 +1,9 @@
 import {
-  MeiucaEngineConfig,
+  MeiucaEngineUserConfig,
   MeiucaEngineModules,
   handle,
   getPath,
+  MeiucaEngineConfig,
 } from "./config-handler";
 
 import MeiucaEngineError from "./exception-handler";
@@ -19,7 +20,7 @@ export default class MeiucaEngineCore {
   functions: Functions;
   validations: Validations;
 
-  constructor(config?: MeiucaEngineConfig & MeiucaEngineModules) {
+  constructor(config?: MeiucaEngineUserConfig & MeiucaEngineModules) {
     try {
       this.config = handle(config);
     } catch (err) {
